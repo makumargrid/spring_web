@@ -1,0 +1,29 @@
+# Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# Compiled class files
+*.class
+
+# Logs
+*.log
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+nbproject/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# H2 / runtime data
+*.db
+*.trace.db
+*.lock.db
