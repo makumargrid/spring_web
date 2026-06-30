@@ -46,3 +46,17 @@ mvn spring-boot:run
 This service ships with **no authentication or authorization** — every endpoint is
 publicly accessible. Add Spring Security (and transport security) before exposing it
 beyond local development.
+
+## Spring MVC notes
+
+Spring Boot **auto-configures** the `DispatcherServlet` (the MVC front controller)
+and maps it to `/`. We therefore do **not** declare a `WebApplicationInitializer` or
+a manual `DispatcherServlet` — that would conflict with the auto-configuration.
+
+To demonstrate the servlet layer, this project registers:
+
+- `RequestLoggingFilter` (`OncePerRequestFilter`) via `FilterRegistrationBean`,
+  mapped to `/api/*`. It adds an `X-Request-Id` response header and logs each request.
+- `InfoServlet` (a plain `HttpServlet`) via `ServletRegistrationBean`, mapped to
+  `/servlet/info`, to show explicit servlet registration next to the DispatcherServlet.
+- `PingController` — a basic `@RestController` at `GET /api/v1/ping`.
