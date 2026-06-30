@@ -8,6 +8,8 @@ import com.example.springweb.dto.CreateAccountRequest;
 import com.example.springweb.dto.UpdateAccountRequest;
 import com.example.springweb.service.AccountService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,7 +34,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<AccountResponse> create(@RequestBody CreateAccountRequest request) {
+    public ResponseEntity<AccountResponse> create(@Valid @RequestBody CreateAccountRequest request) {
         AccountResponse created = service.create(request);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -52,7 +54,7 @@ public class AccountController {
     }
 
     @PutMapping("/{id}")
-    public AccountResponse update(@PathVariable Long id, @RequestBody UpdateAccountRequest request) {
+    public AccountResponse update(@PathVariable Long id, @Valid @RequestBody UpdateAccountRequest request) {
         return service.update(id, request);
     }
 
