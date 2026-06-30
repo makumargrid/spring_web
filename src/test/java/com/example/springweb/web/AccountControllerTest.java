@@ -94,13 +94,15 @@ class AccountControllerTest {
     }
 
     @Test
-    void getAllReturnsAllAccounts() throws Exception {
+    void getAllReturnsPagedAccounts() throws Exception {
         seed("alice");
         seed("bob");
 
         mockMvc.perform(get("/api/v1/accounts"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2));
+                .andExpect(jsonPath("$.content.length()").value(2))
+                .andExpect(jsonPath("$.metadata.totalElements").value(2))
+                .andExpect(jsonPath("$.metadata.page").value(0));
     }
 
     @Test
